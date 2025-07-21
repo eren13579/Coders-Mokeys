@@ -1,24 +1,76 @@
-
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Avatar } from "@/ui/design/avatar/avatar";
+import { Button } from "@/ui/design/button/button";
+import { Logo } from "@/ui/design/logo/logo";
+import { Spinner } from "@/ui/design/spinner/spinner";
+import { Typography } from "@/ui/design/typographies/typography";
+import { RiUser6Fill } from "react-icons/ri";
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div>
+      <div className='flex items-center gap-4 p-4'>
+        <Spinner size="small" />
+        <Spinner />
+        <Spinner size="large" />
+      </div>
+      {/** Logo */}
+      <div className='flex items-center gap-4 p-4'>
+        <Typography variants="caption2" weight="medium">Logo</Typography>
+        <Logo Size="very-small" />
+        <Logo Size="small" />
+        <Logo />
+        <Logo Size="large" />
+      </div>
+      {/** Avatar */}
+      <div className='flex items-center gap-4 p-4'>
+        <Typography variants="caption2" weight="medium">Avatar</Typography>
+        <Avatar Size="small" src="/assets/images/profil.jpg" alt="Avatar de Teda Patrick"/>
+        <Avatar src="/assets/images/profil.jpg" alt="Avatar de Teda Patrick"/>
+        <Avatar Size="large" src="/assets/images/profil.jpg" alt="Avatar de Teda Patrick"/>
+      </div>
+
+      <div className='flex items-center gap-4 p-4'>
+        <Button loading size="small"> Accent </Button>
+        <Button loading size="small" icon={{ icon: RiUser6Fill }} iconPosition="left"> Accent </Button>
+        <Button loading size="small" variant="secondary"> secondary </Button>
+        <Button loading size="small" variant="outline"> outline </Button>
+        <Button loading size="small" variant="disabled"> Accent </Button>
+        <Button loading size="small" variant="ico" icon={{ icon: RiUser6Fill }} />
+      </div>
+
+      <div className='flex items-center gap-4 p-4'>
+        <Button size="small"> Accent </Button>
+        <Button size="small" icon={{ icon: RiUser6Fill }} iconPosition="left"> Accent </Button>
+        <Button size="small" variant="secondary"> secondary </Button>
+        <Button size="small" variant="outline"> outline </Button>
+        <Button size="small" variant="disabled"> Accent </Button>
+        <Button size="small" variant="ico" icon={{ icon: RiUser6Fill }} />
+      </div>
+      <div className='flex items-center gap-4 p-4'>
+        <Button> Accent </Button>
+        <Button variant="secondary"> secondary </Button>
+        <Button variant="outline"> outline </Button>
+        <Button variant="disabled"> Accent </Button>
+        <Button variant="ico" icon={{ icon: RiUser6Fill }} />
+      </div>
+      <div className='flex items-center gap-4 p-4'>
+        <Button size="large"> Accent </Button>
+        <Button size="large" variant="secondary"> secondary </Button>
+        <Button size="large" variant="outline"> outline </Button>
+        <Button size="large" variant="disabled"> Accent </Button>
+        <Button size="large" iconTheme="secondary" variant="ico" icon={{ icon: RiUser6Fill }} />
+        <Button size="large" variant="ico" iconTheme="gray" icon={{ icon: RiUser6Fill }} />
+        <Button size="large" variant="ico" icon={{ icon: RiUser6Fill }} />
+      </div>
+
+      {/* <div className="space-y-4 p-4">
+        <Typography variants="display" component="div"> Coders Monkeys </Typography>
+        <Typography theme="primary" variants="h1" component="div"> Coders Monkeys </Typography>
+        <Typography theme="secondary" variants="lead" component="div"> Coders Monkeys </Typography>
+        <Typography variants="body-sm" component="div"> Coders Monkeys </Typography>
+        <Typography variants='caption1' component="div"> Coders Monkeys </Typography>
+        <Typography variants='caption4' weight="medium" component="div"> Coders Monkeys </Typography>
+      </div> */}
     </div>
   );
 }
