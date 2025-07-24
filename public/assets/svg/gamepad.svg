@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Corps de la manette -->
+  <path d="M40,100 Q30,60 60,50 H140 Q170,60 160,100 Q170,140 140,150 H60 Q30,140 40,100 Z" fill="#333" stroke="#000" stroke-width="2"/>
+  
+  <!-- D-pad -->
+  <rect x="65" y="85" width="10" height="30" fill="#aaa"/>
+  <rect x="55" y="95" width="30" height="10" fill="#aaa"/>
+  
+  <!-- Boutons -->
+  <circle cx="135" cy="90" r="6" fill="red"/>
+  <circle cx="145" cy="100" r="6" fill="blue"/>
+  <circle cx="135" cy="110" r="6" fill="green"/>
+  <circle cx="125" cy="100" r="6" fill="yellow"/>
+  
+  <!-- Joysticks -->
+  <circle cx="80" cy="120" r="8" fill="#666"/>
+  <circle cx="120" cy="120" r="8" fill="#666"/>
+</svg>
