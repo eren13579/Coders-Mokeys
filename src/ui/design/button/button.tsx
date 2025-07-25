@@ -10,6 +10,7 @@ interface Props {
     icon?: IconProps;
     iconTheme?: "primary" | "secondary" | "gray";
     iconPosition?: "left" | "right";
+    type?: "submit" | "button";
     disabled?: boolean;
     loading?: boolean;
     children?: React.ReactNode;
@@ -17,6 +18,7 @@ interface Props {
     linkType?: LinkType;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     action?: Function;
+    fullWith?: boolean;
 }
 
 export const Button = ({
@@ -25,11 +27,13 @@ export const Button = ({
     icon,
     iconTheme = "primary",
     iconPosition = "right",
+    type = "button",
     disabled,
     loading,
     children,
     baseUrl,
     linkType = "internal",
+    fullWith = false,
     action = () => { },
 }: Props) => {
 
@@ -120,10 +124,11 @@ export const Button = ({
 
     const buttonElement = (
         <button
-            type="button"
-            className={clsx(variantStyles, sizeStyles, icoSize, loading && "cursor-wait", "relative animate")}
+            type={type}
+            className={clsx(variantStyles, sizeStyles, icoSize,
+                 loading && "cursor-wait", fullWith && "w-full" ,"relative animate")}
             onClick={handleClick}
-            disabled={disabled}
+            disabled={disabled || loading ? true : false}
         >
             {buttonContent}
         </button>
