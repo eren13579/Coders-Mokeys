@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface Props {
     size?: "small" | "medium" | "large";
-    variant?: "primary" | "secondary" | "outline" | "disabled" | "ico" | "success";
+    variant?: "primary" | "secondary" | "outline" | "disabled" | "ico" | "success" | "danger";
     icon?: IconProps;
     iconTheme?: "primary" | "secondary" | "gray";
     iconPosition?: "left" | "right";
@@ -54,6 +54,9 @@ export const Button = ({
             break;
         case "success":
             variantStyles = "bg-secondary hover:bg-secondary-400 text-white rounded";
+            break;
+        case "danger":
+            variantStyles = "bg-alert-danger hover:bg-alert-danger/75 text-white rounded";
             break;
         case "ico":
             if (iconTheme === "primary") { //default
@@ -126,7 +129,7 @@ export const Button = ({
         <button
             type={type}
             className={clsx(variantStyles, sizeStyles, icoSize,
-                 loading && "cursor-wait", fullWith && "w-full" ,"relative animate")}
+                loading && "cursor-wait", fullWith && "w-full", "relative animate")}
             onClick={handleClick}
             disabled={disabled || loading ? true : false}
         >
