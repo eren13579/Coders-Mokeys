@@ -1,5 +1,6 @@
 import {
     createUserWithEmailAndPassword,
+    sendEmailVerification,
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
     signOut
@@ -81,5 +82,33 @@ export const sendEmailToResetPassword = async (email: string) => {
                 message: firebaseError.message
             }
         };
+    }
+};
+
+export const sendEmailVerificationProcedure = async () => {
+    if(auth.currentUser) {
+        try {
+            await sendEmailVerification(auth.currentUser);
+            return {
+                data: true
+            };
+        } catch (error) {
+    
+            const firebaseError = error as FirebaseError
+            //... @todo format error
+            return {
+                error: {
+                    code: firebaseError.code,
+                    message: firebaseError.message
+                }
+            };
+        }
+    } else {
+        return {
+            error: {
+                code: "unknow",
+                message: "Une erreur est survenue",
+            }
+        }
     }
 };

@@ -1,14 +1,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterView } from "./register.view"
 import { RegisterFormFielsType } from "@/types/froms";
-import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { firebaseCreateUser } from "@/api/authentication";
+import { firebaseCreateUser, sendEmailVerificationProcedure } from "@/api/authentication";
 import { toast } from "react-toastify";
 import { UserToggle } from "@/hooks/use-toggle";
+import { firestoreCreateDocument } from "@/api/firestore";
 
 export const RegisterContainer = () => {
-    const {value: isLoading, setValue:setIsLoading} = UserToggle();
+    const { value: isLoading, setValue: setIsLoading } = UserToggle();
 
     const {
         handleSubmit,
@@ -18,17 +17,34 @@ export const RegisterContainer = () => {
         reset,
     } = useForm<RegisterFormFielsType>();
 
-    const handleCreateUserAuth =  async ({email, password, how_did_hear}: RegisterFormFielsType) => {
-        const {error, data} = await  firebaseCreateUser(email, password);
+    const handleCreateUserDocument = async (collectionName: string, ducomentId: string, document: object) => {
+        const { error } = await firestoreCreateDocument(collectionName, ducomentId, document);
         if (error) {
-            setIsLoading(false)
-            toast.error(error.message)
-            return 
+            toast.error(error.message);
+            setIsLoading(false);
+            return;
         }
-
         toast.success("Bienvenu sur l'app des singes coders");
         setIsLoading(false);
         reset();
+        sendEmailVerificationProcedure()
+    }
+
+    const handleCreateUserAuth = async ({ email, password, how_did_hear }: RegisterFormFielsType) => {
+        const { error, data } = await firebaseCreateUser(email, password);
+        if (error) {
+            setIsLoading(false)
+            toast.error(error.message)
+            return
+        }
+        const userDocumentData = {
+            email: email,
+            how_did_hear: how_did_hear,
+            uid: data.uid,
+            createDate: new Date()
+        };
+
+        handleCreateUserDocument("users", data.uid, userDocumentData);
     }
 
     const onSubmit: SubmitHandler<RegisterFormFielsType> = async (formData) => {
@@ -42,7 +58,7 @@ export const RegisterContainer = () => {
             });
             return
         }
-       handleCreateUserAuth(formData)
+        handleCreateUserAuth(formData)
     };
 
     return (

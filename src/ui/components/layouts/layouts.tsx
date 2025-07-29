@@ -3,14 +3,17 @@ import { Footer } from "../navigations/footer";
 import { Container } from "../containers/container"
 import { Navigation } from "../navigations/navigation";
 import { UserAccountNavigation } from "../navigations/user-account-navigation";
+import { Session } from "../sessions/session";
+import { SessionStatusType } from "@/types/session-status-type";
 
 interface Props {
     children: React.ReactNode;
     isDisplayBreadcrumbs?: boolean;
     withSidebar?: boolean;
+    sessionStatus?: SessionStatusType;
 }
 
-export const Layout = ({children, isDisplayBreadcrumbs = true, withSidebar}: Props) => {
+export const Layout = ({children, isDisplayBreadcrumbs = true, withSidebar, sessionStatus}: Props) => {
 
     let view: React.ReactElement = <></>;
 
@@ -30,11 +33,11 @@ export const Layout = ({children, isDisplayBreadcrumbs = true, withSidebar}: Pro
     }
 
     return (
-        <>
+        <Session sessionStatus={sessionStatus}>
             <Navigation />
             {isDisplayBreadcrumbs && <Breadcrumbs />}
-            {/* {children} */}
+            {view}
             <Footer />
-        </>
+        </Session>
     )
 }

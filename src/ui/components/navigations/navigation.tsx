@@ -4,11 +4,22 @@ import { Typography } from "@/ui/design/typographies/typography"
 import { Button } from "@/ui/design/button/button"
 import Link from "next/link"
 import { ActiveLink } from "./active-link"
+import { userAuth } from "@/context/AuthUserContext"
+import { AccountAvatarLink } from "./account-avatar-link"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface Props { }
 
 export const Navigation = ({ }: Props) => {
+    const { authUser } = userAuth();
+
+    const authentificationSysteme = (
+        <div className="flex items-center gap-2">
+            <Button baseUrl="/connexion" size="small">Connexion</Button>
+            <Button baseUrl="/connexion/inscription" size="small" variant="secondary">Rejoindre</Button>
+        </div>
+    );
+
     return (
         <div className="border-b-2 border-gray-400">
             <Container className="flex items-center justify-between py-1.5 gap-7">
@@ -33,11 +44,7 @@ export const Navigation = ({ }: Props) => {
                         <ActiveLink href="/formations">Formation</ActiveLink>
                         <ActiveLink href="/contacts">Contact</ActiveLink>
                     </Typography>
-
-                    <div className="flex items-center gap-2">
-                        <Button baseUrl="/connexion" size="small">Connexion</Button>
-                        <Button baseUrl="/connexion/inscription" size="small" variant="secondary">Rejoindre</Button>
-                    </div>
+                    {!authUser ? authentificationSysteme : <AccountAvatarLink />}
                 </div>
             </Container>
         </div>
