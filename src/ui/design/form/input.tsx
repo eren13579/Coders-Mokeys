@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { Typography } from "../typographies/typography";
 
 interface Props {
+    label?: string;
     isLoading: boolean;
     placeholder: string;
     type?: "text" | "email" | "password";
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export const Input = ({
+    label,
     isLoading,
     placeholder,
     type = "text",
@@ -27,6 +29,11 @@ export const Input = ({
 
     return (
         <div className="space-y-2">
+            {label && (
+                <Typography variants="caption4" component="div" theme={errors[id] ? "danger" : "gray-600"}>
+                    {label}
+                </Typography>
+            )}
             <input type={type} placeholder={placeholder} className={clsx(
                 isLoading && "cursor-not-allowed",
                 errors[id] ? "placeholder-alert-danger text-alert-danger" : "placeholder-gray-600",

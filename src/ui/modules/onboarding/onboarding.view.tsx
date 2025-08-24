@@ -1,0 +1,43 @@
+import { BaseComponentProps } from "@/types/onboarding-steps-list";
+
+interface Props {
+    getCurrentStep: any,
+    next: () => void,
+    prev: () => void,
+    isFirstStep: () => boolean,
+    isFinalStep: () => boolean,
+    stepList: any,
+}
+
+export const OnboardingView = ({
+    getCurrentStep,
+    next,
+    prev,
+    isFirstStep,
+    isFinalStep,
+    stepList,
+}: BaseComponentProps) => {
+
+    if (getCurrentStep()?.component) {
+        const Component = getCurrentStep()?.component.step;
+
+        return (
+            <div>
+                {
+                    Component && (
+                        < Component
+                            getCurrentStep={getCurrentStep}
+                            next={next}
+                            prev={prev}
+                            isFirstStep={isFirstStep}
+                            isFinalStep={isFinalStep}
+                            stepList={stepList}
+                        />
+                    )
+                }
+            </div>
+        )
+    }
+
+    return null;
+};

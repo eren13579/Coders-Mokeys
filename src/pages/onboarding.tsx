@@ -1,18 +1,17 @@
 /**COMPONENTS */
 import { REGISTERED } from "@/lib/session-status";
-import { Layout } from "@/ui/components/layouts/layouts";
 import { Seo } from "@/ui/components/seo/Seo";
+import { Session } from "@/ui/components/sessions/session";
+import { OnboardingContainer } from "@/ui/modules/onboarding/onboarding.container";
 
 export default function Onboarding() {
-  return (
-    <>
-      <Seo title="Onboarding" description="description de la page onboarding" />
+    return (
+        <>
+            <Seo title="Onboarding" description="description de la page onboarding" />
 
-      <Layout sessionStatus={REGISTERED}>
-            <div className="flex items-center justify-center pt-20 py-40">
-                Welcome to onboarding
-            </div>
-      </Layout>
-    </>
-  );
+            <Session sessionStatus={REGISTERED}>
+                <OnboardingContainer />
+            </Session>
+        </>
+    );
 }
